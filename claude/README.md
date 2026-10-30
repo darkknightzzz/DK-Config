@@ -14,6 +14,9 @@ claude/
 │   └── plan-format.md
 ├── templates/
 │   └── plan-example.md       # Plan 格式示例
+├── skills/
+│   └── research/
+│       └── SKILL.md          # 研究续接机制
 ├── install.sh                # Git Bash / Linux / macOS
 ├── install.ps1               # Windows PowerShell
 ├── .gitignore
@@ -41,7 +44,7 @@ Git Bash、Linux 或 macOS：
 bash ./claude/install.sh
 ```
 
-默认安装到 `~/.claude/`。脚本只安装上面列出的六个配置或模板文件，不会清空目标目录，也不会修改现有的 `settings.json`。
+默认安装到 `~/.claude/`。脚本只安装上面列出的七个配置、模板或 skill 文件，不会清空目标目录，也不会修改现有的 `settings.json`。
 
 如果存在同名文件，脚本会先备份到：
 
@@ -83,3 +86,7 @@ git push
 - `projects/`、`sessions/`、`session-env/`：会话数据。
 - `file-history/`、`shell-snapshots/`、`backups/`：历史内容和环境快照。
 - `ide/`、`plugins/store/`：编辑器及插件运行状态。
+
+## 已知限制
+
+- `skills/research/SKILL.md` 中写死了研究根目录 `C:\Users\duckknight\Desktop\empty\code\DK-research\re-history`。换机器恢复后需要手动改成该机器上的实际路径。

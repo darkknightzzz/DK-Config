@@ -8,6 +8,7 @@ BACKUP_DIR="$TARGET_DIR/backups/DK-Config/$TIMESTAMP"
 
 FILES=(
   "CLAUDE.md"
+  "skills/research/SKILL.md"
   "memory/MEMORY.md"
   "memory/file-output-level.md"
   "memory/plan-first-no-auto-changes.md"

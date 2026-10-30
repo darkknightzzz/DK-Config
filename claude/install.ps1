@@ -11,6 +11,7 @@ $Timestamp = "{0}-{1}" -f (Get-Date -Format "yyyyMMdd-HHmmss"), $PID
 $BackupDir = Join-Path $TargetDir "backups/DK-Config/$Timestamp"
 $Files = @(
     "CLAUDE.md",
+    "skills/research/SKILL.md",
     "memory/MEMORY.md",
     "memory/file-output-level.md",
     "memory/plan-first-no-auto-changes.md",
