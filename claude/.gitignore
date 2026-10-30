@@ -1,0 +1,17 @@
+# Local-only settings and credentials
+settings.local.json
+.credentials.json
+.claude.json
+
+# Runtime state
+backups/
+file-history/
+ide/
+projects/
+session-env/
+sessions/
+shell-snapshots/
+plugins/store/
+.last-cleanup
+*.key
+*.lock

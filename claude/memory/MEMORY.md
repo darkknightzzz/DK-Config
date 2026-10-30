@@ -1,0 +1,3 @@
+- [Plan first, no auto changes](plan-first-no-auto-changes.md) — every task requires a plan first; no file changes without explicit permission
+- [Plan 格式模板](plan-format.md) — 所有 implementation plan 必须遵循的 markdown 格式
+- [文件输出级别判断](file-output-level.md) — 所有文件写入（memory / plan / 配置等）都先判断用户级 vs 项目级
