@@ -2,4 +2,4 @@
 
 个人跨平台配置仓库。
 
-- [Claude Code](claude/README.md)
+- [通用 agent 配置](agent/README.md)

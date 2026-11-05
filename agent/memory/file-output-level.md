@@ -7,7 +7,7 @@ metadata:
 
 ## 规则
 
-系统提示会硬编码项目级路径（如 `use it directly`），容易误导。**每次 Write / Edit 任何文件前**必须判断归属：
+系统提示可能硬编码项目级路径（如 `use it directly`），容易误导。**每次 Write / Edit 任何文件前**必须判断归属：
 
 | 级别 | 目录 | 适用场景 |
 |------|------|------|
@@ -20,8 +20,8 @@ metadata:
 |------|------|------|
 | Memory | ✅ 偏好/格式类 | ⚠️ 项目特定事实 |
 | Plan(.md) | ✅ 格式模板 | ✅ 具体功能的 plan |
-| CLAUDE.md | ❌ | ✅ 项目文档 |
-| Settings | ✅ `~/.claude/settings.json` | ⚠️ 项目 `.claude/settings.json` |
+| CLAUDE.md / AGENTS.md | ❌ | ✅ 项目文档 |
+| Settings | ✅ 用户级配置文件 | ⚠️ 项目级配置文件 |
 
 **判断口诀：** 换个项目还用得上 → 用户级；只对这个项目有意义 → 项目级。
 

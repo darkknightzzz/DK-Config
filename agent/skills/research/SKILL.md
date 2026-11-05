@@ -5,7 +5,7 @@ description: 研究类讨论的统一入口。当用户提出研究、分析、�
 
 # research
 
-研究根目录：`C:\Users\duckknight\Desktop\empty\code\DK-research\re-history`
+研究根目录：`__RESEARCH_ROOT__`
 
 落盘模式：`ask`　（可选：`ask` | `auto` | `auto-with-report`）
 

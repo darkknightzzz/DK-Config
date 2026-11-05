@@ -20,4 +20,4 @@ metadata:
 
 **Why:** 用户偏好 git diff 风格 + 信号灯风险 + 独立目标/文件区，preview 模式下视觉效果清晰。
 
-**How to apply:** 每次出 plan 前参照 `~/.claude/templates/plan-example.md`，严格复用其 section 结构和 diff 风格。
+**How to apply:** 每次出 plan 前参照 `templates/plan-example.md`（相对配置文件所在目录），严格复用其 section 结构和 diff 风格。
