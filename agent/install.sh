@@ -6,6 +6,7 @@ TARGETS="${DK_TARGETS:-both}"
 CLAUDE_DIR="${CLAUDE_HOME:-$HOME/.claude}"
 DSH_DIR="${DSH_HOME:-$HOME/.dsh}"
 RESEARCH_ROOT="${DK_RESEARCH_ROOT:-}"
+RESEARCH_MODE="${DK_RESEARCH_MODE:-ask}"
 TIMESTAMP="$(date +%Y%m%d-%H%M%S)-$$"
 
 TMP_DIR="$(mktemp -d)"
@@ -31,6 +32,14 @@ MEMORY_ORDER=(
   "memory/plan-format.md"
   "memory/file-output-level.md"
 )
+
+case "$RESEARCH_MODE" in
+  ask|auto|auto-with-report) ;;
+  *)
+    printf 'warning: 未知的 DK_RESEARCH_MODE=%s，回落为 ask。\n' "$RESEARCH_MODE" >&2
+    RESEARCH_MODE="ask"
+    ;;
+esac
 
 backup_created=0
 written=0
@@ -105,7 +114,7 @@ if [ -z "$RESEARCH_ROOT" ]; then
 else
   escaped_root="$(printf '%s' "$RESEARCH_ROOT" | sed -e 's/[\\&|]/\\&/g')"
   normalize "$SOURCE_DIR/skills/research/SKILL.md" "$TMP_DIR/research-source.md"
-  sed "s|__RESEARCH_ROOT__|$escaped_root|g" \
+  sed -e "s|__RESEARCH_ROOT__|$escaped_root|g" -e "s|__RESEARCH_MODE__|$RESEARCH_MODE|g" \
     "$TMP_DIR/research-source.md" > "$TMP_DIR/research-SKILL.md"
   RESEARCH_TEMPLATE="$TMP_DIR/research-SKILL.md"
 fi

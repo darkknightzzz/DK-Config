@@ -54,7 +54,17 @@ Git Bash、Linux 或 macOS：
 DK_TARGETS=both DK_RESEARCH_ROOT=/path/to/re-history bash ./agent/install.sh
 ```
 
-`-Targets` / `DK_TARGETS` 取 `claude`、`dsh`、`both`，默认 `both`。
+### 参数
+
+| PowerShell | 环境变量 | 默认 | 说明 |
+|-----------|---------|------|------|
+| `-Targets` | `DK_TARGETS` | `both` | `claude` / `dsh` / `both` |
+| `-ClaudeHome` | `CLAUDE_HOME` | `~/.claude` | 自定义目标目录 |
+| `-DshHome` | `DSH_HOME` | `~/.dsh` | 自定义目标目录 |
+| `-ResearchRoot` | `DK_RESEARCH_ROOT` | 空 | research 根目录；**为空则跳过 skill 安装并告警** |
+| `-ResearchMode` | `DK_RESEARCH_MODE` | `ask` | `ask` / `auto` / `auto-with-report`；非法值回落 `ask` |
+
+`ResearchMode` 的语义见 `skills/research/SKILL.md` 第 4 节「落盘 — 询问式」。
 
 ### 自定义目标目录
 
@@ -87,9 +97,16 @@ CLAUDE_HOME=/tmp/.claude DSH_HOME=/tmp/.dsh bash ./agent/install.sh
 
 - **幂等**：目标文件内容未变则跳过，不写入、不备份
 - **备份**：真正覆盖前备份到 `<home>/backups/DK-Config/<时间戳>-<PID>/`
-- **空值保护**：`-ResearchRoot` 为空时跳过 research skill 安装并告警，绝不写入空路径
+- **空值保护**：`ResearchRoot` 为空时跳过 research skill 安装并告警，绝不写入空路径
 - **换行归一**：产物一律 LF，两个安装器输出逐字节一致
 - **UTF-8 无 BOM** 写入产物，避免 Windows 中文乱码
+
+## 新机器恢复清单
+
+1. `git clone` 仓库
+2. 跑安装脚本，**必须传 `-ResearchRoot`**（这是唯一机器相关参数）
+3. 确认 `research` 根目录下 `INDEX.md` 存在（数据不在本仓库，需要单独同步）
+4. 若用 DSH：**新开一个会话**，全局指令在会话首次请求时加载
 
 ## 已知限制
 

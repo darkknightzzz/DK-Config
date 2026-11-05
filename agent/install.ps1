@@ -4,7 +4,8 @@ param(
     [string]$Targets = "both",
     [string]$ClaudeHome = $(if ($env:CLAUDE_HOME) { $env:CLAUDE_HOME } else { Join-Path $HOME ".claude" }),
     [string]$DshHome = $(if ($env:DSH_HOME) { $env:DSH_HOME } else { Join-Path $HOME ".dsh" }),
-    [string]$ResearchRoot = $env:DK_RESEARCH_ROOT
+    [string]$ResearchRoot = $env:DK_RESEARCH_ROOT,
+    [string]$ResearchMode = $(if ($env:DK_RESEARCH_MODE) { $env:DK_RESEARCH_MODE } else { "ask" })
 )
 
 Set-StrictMode -Version Latest
@@ -104,12 +105,21 @@ if ($Targets -eq "dsh" -or $Targets -eq "both") {
 }
 
 $instructionText = New-InstructionText
+
 $researchText = $null
 if ([string]::IsNullOrWhiteSpace($ResearchRoot)) {
     Write-Warning "未提供 -ResearchRoot 或 DK_RESEARCH_ROOT，跳过 research skill 安装（不会写入空路径）。"
 }
 else {
-    $researchText = [System.IO.File]::ReadAllText((Join-Path $SourceDir "skills/research/SKILL.md")).Replace("__RESEARCH_ROOT__", $ResearchRoot)
+    # ValidateSet 只约束显式传参；经环境变量带入的值在这里兜底校验
+    $mode = $ResearchMode
+    if ($mode -ne "ask" -and $mode -ne "auto" -and $mode -ne "auto-with-report") {
+        Write-Warning "未知的 ResearchMode '$mode'，回落为 ask。"
+        $mode = "ask"
+    }
+    $template = [System.IO.File]::ReadAllText((Join-Path $SourceDir "skills/research/SKILL.md"))
+    $template = $template.Replace("__RESEARCH_ROOT__", $ResearchRoot)
+    $researchText = $template.Replace("__RESEARCH_MODE__", $mode)
 }
 
 foreach ($spec in $specs) {
